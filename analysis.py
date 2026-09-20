@@ -210,15 +210,19 @@ Do not invent specifications or facts that are not provided.
 Keep the response concise and useful for someone deciding whether to buy the phone.
     """
 def get_ai_advice(advisor_data):
-    client = genai.Client(
-        api_key=st.secrets["GEMINI_API_KEY"]
-    )
+    try:
+        client = genai.Client(
+            api_key=st.secrets["GEMINI_API_KEY"]
+        )
 
-    prompt = create_advisor_prompt(advisor_data)
+        prompt = create_advisor_prompt(advisor_data)
 
-    response = client.models.generate_content(
-        model="gemini-3.6-flash",
-        contents=prompt
-    )
+        response = client.models.generate_content(
+            model="gemini-3.6-flash",
+            contents=prompt
+        )
 
-    return response.text
+        return response.text
+
+    except Exception as e:
+        return f"AI Advisor error: {type(e).__name__}"
