@@ -225,4 +225,4 @@ def get_ai_advice(advisor_data):
         return response.text
 
     except Exception as e:
-        return f"AI Advisor error: {type(e).__name__}"
+     return "The AI Advisor is temporarily unavailable. Please try again later."
